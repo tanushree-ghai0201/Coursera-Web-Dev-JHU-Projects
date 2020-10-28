@@ -12,7 +12,8 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 (function (global) {
 
 var dc = {};
-
+var aboutHtml = "snippets/about-snippet.html";
+var awardsHtml = "snippets/awards-snippet.html";
 var homeHtmlUrl = "snippets/home-snippet.html";
 var allCategoriesUrl = 
   "https://davids-restaurant.herokuapp.com/categories.json";
@@ -339,7 +340,23 @@ function insertItemPortionName(html,
   html = insertProperty(html, portionPropName, portionValue);
   return html;
 }
+  //== Awards =============================================================
+function loadawards() {
+  $.get(awardsHtml,function(awdhtml){
+      $("#main-content").html(awdhtml);
+  });
+}
 
+ $('body').on('click', '.awardsjs', loadawards);
+
+//== About ================================================================
+function loadabout() {
+  $.get(aboutHtml,function(abthtml){
+      $("#main-content").html(abthtml);
+  });
+}
+
+ $('body').on('click', '.aboutjs', loadabout);
 
 global.$dc = dc;
 
