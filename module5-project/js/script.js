@@ -341,11 +341,19 @@ function insertItemPortionName(html,
   return html;
 }
   //== Awards =============================================================
-function loadawards() {
-  $.get(awardsHtml,function(awdhtml){
+  dc.loadawards = function () {
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    awardsHtml,
+    function(awdhtml){
       $("#main-content").html(awdhtml);
   });
-}
+};
+// function loadawards() {
+  //$.get(awardsHtml,function(awdhtml){
+    //  $("#main-content").html(awdhtml);
+  //});
+//} 
 
  $('body').on('click', '.awardsjs', loadawards);
 
