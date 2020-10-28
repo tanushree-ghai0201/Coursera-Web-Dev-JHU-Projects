@@ -12,8 +12,7 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 (function (global) {
 
 var dc = {};
-var aboutHtml = "snippets/about-snippet.html";
-var awardsHtml = "snippets/awards-snippet.html";
+
 var homeHtmlUrl = "snippets/home-snippet.html";
 var allCategoriesUrl = 
   "https://davids-restaurant.herokuapp.com/categories.json";
@@ -63,7 +62,7 @@ var switchMenuToActive = function () {
 
 // On page load (before images or CSS)
 document.addEventListener("DOMContentLoaded", function (event) {
-  
+
 // TODO: STEP 0: Look over the code from 
 // *** start *** 
 // to 
@@ -93,7 +92,7 @@ $ajaxUtils.sendGetRequest(
 // Builds HTML for the home page based on categories array
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
-  
+
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -102,7 +101,7 @@ function buildAndShowHomeHTML (categories) {
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-      
+
       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;      
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -119,7 +118,7 @@ function buildAndShowHomeHTML (categories) {
 
       chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
-      
+
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
@@ -192,7 +191,7 @@ function buildAndShowCategoriesHTML (categories) {
 function buildCategoriesViewHtml(categories, 
                                  categoriesTitleHtml,
                                  categoryHtml) {
-  
+
   var finalHtml = categoriesTitleHtml;
   finalHtml += "<section class='row'>";
 
@@ -230,7 +229,7 @@ function buildAndShowMenuItemsHTML (categoryMenuItems) {
         function (menuItemHtml) {
           // Switch CSS class active to menu button
           switchMenuToActive();
-          
+
           var menuItemsViewHtml = 
             buildMenuItemsViewHtml(categoryMenuItems, 
                                    menuItemsTitleHtml,
@@ -248,7 +247,7 @@ function buildAndShowMenuItemsHTML (categoryMenuItems) {
 function buildMenuItemsViewHtml(categoryMenuItems, 
                                 menuItemsTitleHtml,
                                 menuItemHtml) {
-  
+
   menuItemsTitleHtml = 
     insertProperty(menuItemsTitleHtml,
                    "name",
@@ -340,31 +339,7 @@ function insertItemPortionName(html,
   html = insertProperty(html, portionPropName, portionValue);
   return html;
 }
-  //== Awards =============================================================
-  dc.loadawards = function () {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    awardsHtml,
-    function(awdhtml){
-      $("#main-content").html(awdhtml);
-  });
-};
-// function loadawards() {
-  //$.get(awardsHtml,function(awdhtml){
-    //  $("#main-content").html(awdhtml);
-  //});
-//} 
 
- $('body').on('click', '.awardsjs', loadawards);
-
-//== About ================================================================
-function loadabout() {
-  $.get(aboutHtml,function(abthtml){
-      $("#main-content").html(abthtml);
-  });
-}
-
- $('body').on('click', '.aboutjs', loadabout);
 
 global.$dc = dc;
 
