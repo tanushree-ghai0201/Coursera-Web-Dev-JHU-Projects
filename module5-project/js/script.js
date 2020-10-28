@@ -88,18 +88,7 @@ $ajaxUtils.sendGetRequest(
 });
 // *** finish **
 
-dc.loadAbout = function () {
-  $ajaxUtils.sendGetRequest(aboutHtml, function (responseText) {
-      document.querySelector("#main-content").innerHTML = responseText;
-  }, false);
-};
 
-//=============================Awards page====================================//
-dc.loadAwards = function () {
-  $ajaxUtils.sendGetRequest(awardsHtml, function (responseText) {
-    document.querySelector("#main-content").innerHTML = responseText;
-  }, false);
-};
 // Builds HTML for the home page based on categories array
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
@@ -350,6 +339,18 @@ function insertItemPortionName(html,
   html = insertProperty(html, portionPropName, portionValue);
   return html;
 }
+  dc.loadAbout = function () {
+  $ajaxUtils.sendGetRequest(aboutHtml, function (responseText) {
+      document.querySelector("#main-content").innerHTML = responseText;
+  }, false);
+};
+
+//=============================Awards page====================================//
+dc.loadAwards = function () {
+  $ajaxUtils.sendGetRequest(awardsHtml, function (responseText) {
+    document.querySelector("#main-content").innerHTML = responseText;
+  }, false);
+};
 
 
 global.$dc = dc;
